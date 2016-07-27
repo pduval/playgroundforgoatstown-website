@@ -21,7 +21,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-	
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">	
+    <link rel="stylesheet" href="css/styles.css">	
   </head>
 <body>
  <!--<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -49,12 +51,11 @@
       <div class="container">
         <h1><span style="background-color:#fff;opacity: 0.8;">A Playground for Goatstown</span></h1>
         <p style="background-color:#fff;opacity: 0.8;">Despite the large number of young children in Goatstown, there is no playground within walking distance. The space for a playground exists, and the funds and support are there. So why not build it?</p>
-       <a href="#" class="btn btn-default" role="button">Click to see local kids' drawings and letters</a>
+       <a id="gotogallery" href="#gallery" class="btn btn-default" role="button">Click to see local kids' drawings and letters</a>
       </div>
     </div>
 
 	<div class="container">
-
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row">
@@ -87,7 +88,7 @@
 								<br/>My address is: XXX
 							</p>
 						</div>
-						<div style="padding:10px;margin-top:20px;background-color:#C7EBF9;border-radius:8px">
+						<div id="gallery" style="padding:10px;margin-top:20px;background-color:#C7EBF9;border-radius:8px">
 							<h2>Kids Can Help Too!</h2>
 							<p>
 								We'd love it if your kids could draw a picture, or write a letter, letting us know what having a playground within walking distance would mean to them! 
@@ -96,7 +97,18 @@
 								We will put up all drawings and letters on our website, as well as sending them into the council. 
 								Please scan them in, or take a photo, and email them to us at <a href="mailto:goatstownplayground@gmail.com">goatstownplayground@gmail.com</a>.
 							</p>
-							<a href="#" class="btn btn-info" role="button">Click here to see the kids' gallery!</a>
+							<a id="showgallery" href="#gallery" class="btn btn-info" role="button">Click here to see the kids' gallery!</a>
+                            <div id="galleryrow" class="links">
+                                <a href="images/banner.jpg" title="Banana" data-gallery>
+                                    <img src="images/banner.jpg" alt="Banana">
+                                </a>
+                                <a href="images/banner.jpg" title="Apple" data-gallery>
+                                    <img src="images/banner.jpg" alt="Apple">
+                                </a>
+                                <a href="images/banner.jpg" title="Orange" data-gallery>
+                                    <img src="images/banner.jpg" alt="Orange">
+                                </a>
+                            </div>
 						</div>
 					</div>
 					
@@ -226,12 +238,62 @@
       </footer>
     </div> <!-- /container -->
 
-     
+    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary next">
+                            Next
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-	<!--Google Analytics
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="js/bootstrap-image-gallery.min.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function() {
+         function showGallery() {
+             $("#galleryrow").removeClass("hidden").fadeIn();
+         }
+         $("#gotogallery").click(function() {
+             showGallery();
+         });
+         $("#showgallery").click(function() {
+             showGallery();
+             return false;
+         });
+     });
+    </script>
+    <!--Google Analytics
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
